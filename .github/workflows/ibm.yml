@@ -34,16 +34,15 @@ jobs:
       run: |
         ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID"
         ./IBM_Cloud_CLI/ibmcloud target --cf
-        ./IBM_Cloud_CLI/ibmcloud cf install -v -f 6.51.0
+        ./IBM_Cloud_CLI/ibmcloud cf install -v 6.51.0 -f
     - name: Restart IBM Cloud
       env:
         IBM_APP_NAME: ${{ secrets.IBM_APP_NAME }}
         UUID: ${{ secrets.UUID }}
         WS_PATH: ${{ secrets.WS_PATH }}
       run: |
-        echo "开始下载v2ray-cloudfoundry文件"
-        git submodule update --init --recursive
         cd ./v2ray-cloudfoundry/v2ray
+        echo "已经进入V2ray目录，准备开始安装v2ray-cloudfoundry"
         pwd
         chmod 0755 ./*
         cd ..
