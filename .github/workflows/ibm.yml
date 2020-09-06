@@ -44,9 +44,11 @@ jobs:
         cd ./v2ray-cloudfoundry/v2ray
         echo "已经进入V2ray目录，准备开始安装v2ray-cloudfoundry"
         pwd
+        echo "对v2ray的可执行文件授予可编辑权限。"
         chmod 0755 ./*
         cd ..
         pwd
+        echo "开始修改v2ray的配置文件。"
         cat >  ./manifest.yml  << EOF
         applications:
         - path: .
@@ -84,7 +86,8 @@ jobs:
             ]
         }
         EOF
-        pwd
-        echo "开始推送配置文件,远程部署!!"
+        echo "v2ray配置文件修改完成。。"
+        cat ./v2ray/config.json
+        echo "开始推送配置文件，进行远程部署!!"
         ../IBM_Cloud_CLI/ibmcloud cf push
-        echo "配置完成。"
+        echo "配置完成。尽情享用~~~"
